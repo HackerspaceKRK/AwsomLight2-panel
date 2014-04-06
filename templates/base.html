@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Language" content="pl-PL" />
+		<title>Hackerspace Kraków</title>
+		<link rel="space-api" href="http://spaceapi.hskrk.pl" />
+		<link rel="Shortcut icon" href="http://hackerspace-krk.pl/wp-content/themes/hskrk/images/favicon.png" />
+		<link href="http://hackerspace-krk.pl/wp-content/themes/hskrk/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="http://hackerspace-krk.pl/wp-content/themes/hskrk/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+		<link href="http://hackerspace-krk.pl/wp-content/themes/hskrk/style.css" rel="stylesheet" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+			<script src="http://hackerspace-krk.pl/wp-content/themes/hskrk/bootstrap/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<style>
+			.lead {
+				margin-bottom: 30px;
+			}
+			#count {
+				font-size: 3em;
+				line-height: 1em;
+			}
+			.count_small {
+				font-size: 2.5em;
+				line-height: 1em;
+			}
+			.names {
+				font-size: 15pt;
+			}
+			.copyright {
+				font-size: 0.7em;
+			}
+		</style>
+
+	</head>
+	<body class="home blog">
+		<div id="top">
+			<div class="container">
+				<div class="row">
+					<div class="span4">
+						<div id="mainlogo">
+							<a href="http://hackerspace-krk.pl/"><img src="http://hackerspace-krk.pl/wp-content/themes/hskrk/images/logo.png" alt="Hackerspace Kraków" /></a>
+						</div>
+					</div>
+					<div class="span8">
+						<div id="topmenu">
+							{{ menu }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="ornament1"></div>
+
+		<div id="middle">
+			<div class="container">				
+				{% block content %}{% endblock %}
+			</div>
+		</div>
+
+		<div id="ornament2"></div>
+
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="span12 teledata">
+						<span class="name">Fundacja Hackerspace Kraków</span><br />
+						<span class="address">Radziwiłłowska 20/2, 31-026 Krakow</span><br />
+						<span class="copyright">2013 Copyright by Hackerspace Kraków, All right reserved</span>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+.temp {
+	font-size: 23pt;
+	color: red;
+}
+</style>
+<div class="row">
+	<div class="span12 text-center">
+		<h2>Urządzeń w Hackerspace<div class="count_small">{{ devices }}</div></h2>
+		{% if names %}
+		<hr />
+		<h2>
+		{% for name in names %}
+		<div class="names">{{ name }}</div>
+		{% endfor %}
+		{% endif %}
+		<hr />
+		{% if temp %}
+		</h2>
+		<h2>Aktualna temperatura<div class="temp">{{ temp|floatformat:2 }}°C</div></h2>
+		{% endif %}
+	</div>
+</div>
+
+{% endblock %}

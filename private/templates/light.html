@@ -1,0 +1,133 @@
+<?php
+$lights=file_get_contents('http://light/light_valid.txt');
+?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>Hackerspace KRK :: AwsomLight&trade;</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8;" />
+
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
+    <link rel="stylesheet" href="/static/stylesheets/bootstrap-switch.css" />
+    <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/js/google-code-prettify/prettify.css" />
+    <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/docs.css" />
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+    <link rel="stylesheet" href="http://bdmdesign.github.io/bootstrap-switch/static/stylesheets/flat-ui-fonts.css">
+
+    <style type="text/css">
+        body {
+  //          padding-top: 60px;
+            padding-bottom: 40px;
+          }
+        .span4, h1, h4 {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4em;
+        }
+
+        h4 {
+            font-weight: 200;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+	<!--<p><marquee>"It's astonishing!"&nbsp;&nbsp;<i>/Asia (24 y) from $YOUR_CITY/</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;-&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"It's breathtaking!"&nbsp;&nbsp;<i>/Basia (16 y) from $YOUR_CITY_OF_BIRTH/</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;-&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"It's mind-blowing!"&nbsp;&nbsp;<i>/Ania (19 y) from $HERE_BE_DRAGONS/</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;-&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Phi, phi!"&nbsp;&nbsp;<i>/Maria ($HERE_COMES_MARIA_AGE y) from Dobczyce/</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;-&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"AwsomLight&trade; changed my lif... erm, light!"&nbsp;&nbsp;<i>/Abdullah from سمَـَّوُوُحخ ̷̴̐خ ̷̴̐خ ̷̴̐خ - امارتيخ ̷̴̐خ ***/</i></marquee></p>-->
+        <div class="jumbotron">
+        <h1><img src="/static/logo.png"></h1>
+        <p>This is our the most awesome AwsomLight&trade;!</p>
+	<p>Please toggle the toggle and visit our space to see the result<sup><a href="#disclaimer">*</a></sup>!</p>
+      </div>
+<br />
+    </div> <!-- /container -->
+    <div class="container">
+	<div class="row-fluid">
+            <ul class="thumbnails">
+              <li class="span4">
+                <div class="thumbnail">
+                  <img src="/static/korytarz.png" style="width: 300px; height: 200px;" data-src="holder.js/300x200" alt="300x200">
+                  <div class="caption">
+                    <h3>Corridor</h3>
+	                <div class="make-switch light-switch" data-on="default" data-off="default">
+										<input type="checkbox" {{ corridor }}? name="corridor">
+			</div>
+                  </div>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="thumbnail">
+                  <img src="/static/hardroom.png" style="width: 300px; height: 200px;" data-src="holder.js/300x200" alt="300x200">
+                  <div class="caption">
+                    <h3>Hardroom</h3>
+                	<div class="make-switch light-switch" data-on="danger" data-off="danger">
+										<input type="checkbox" {{ hardroom }} name="hardroom">
+	                </div>
+                  </div>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="thumbnail">
+                <img src="/static/softroom.png" style="width: 300px; height: 200px;" data-src="holder.js/300x200" alt="300x200">
+                  <div class="caption">
+                    <h3>Softroom</h3>
+        	        <div class="make-switch light-switch" data-on="warning" data-off="warning">
+	                    <input type="checkbox" {{ softroom }} name="softroom">
+                	</div>
+                  </div>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="thumbnail">
+                <img src="/static/kitchen.jpg" style="width: 300px; height: 200px;" data-src="holder.js/300x200" alt="300x200">
+                  <div class="caption">
+                    <h3>Kitchen</h3>
+        	        <div class="make-switch light-switch" data-on="warning" data-off="warning">
+	                    <input type="checkbox" {{ kitchen }} name="kitchen">
+                	</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+    </div>
+    <div class="container">
+	<center>
+		<a href="http://prism.asymetria.net/">s&nbsp;&nbsp;h&nbsp;&nbsp;a&nbsp;&nbsp;r&nbsp;&nbsp;e&nbsp;&nbsp;&nbsp;&nbsp;o&nbsp;&nbsp;n<br /><img src="prism.png" width="110"></a>
+	</center>
+<p style="text-align: right;"><a name="disclaimer"></a>* results may vary</p>
+<p style="text-align: right;">** for ilustrative purpose</p>
+<p style="text-align: right;">*** may not work on Apple&reg; Mac OS</p>
+    </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        window.prettyPrint && prettyPrint();
+
+        $('.light-switch').on('switch-change', function (e, data) {
+					if (data.value)
+            $.get('http://light.at.hskrk.pl/api/v2/light/enable/' + data.el.context.name);
+					else
+            $.get('http://light.at.hskrk.pl/api/v2/light/disable/' + data.el.context.name);
+        });
+    });
+</script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://getbootstrap.com/2.3.2/assets/js/google-code-prettify/prettify.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="/static/js/bootstrap-switch.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row welcome text-center">
+	<div class="span12">
+		<p class="lead">Witaj świecie!</p>
+	</div>
+</div>
+
+<hr />
+<div class="row">
+	<div class="span12 text-center">
+		<h2>W tej chwili w Hackerspace {{ znaj_str }} się <div id="count">{{ users }}</div> {{ osob_str }}.</h2>
+	</div>
+</div>
+
+<hr />
+<div class="row">
+	<div class="span3 text-center">
+		<img src="static/switch_{{ hardroom }}.png" alt="" />
+		<h2>Hardroom</h2>
+	</div>
+	<div class="span3 text-center">
+		<img src="static/switch_{{ softroom }}.png" alt="" />
+		<h2>Softroom</h2>
+	</div>
+	<div class="span3 text-center">
+		<img src="static/switch_{{ corridor }}.png" alt="" />
+		<h2>Korytarz</h2>
+	</div>
+	<div class="span3 text-center">
+		<img src="static/switch_{{ kitchen }}.png" alt="" />
+		<h2>Kuchnia</h2>
+	</div>
+</div>
+
+{% endblock %}
