@@ -54,6 +54,7 @@ class IndexView(PrivateView):
 			znaj_str = 'znajdują'
 		self.set("osob_str", osob_str)
 		self.set("znaj_str", znaj_str)
+		self.set("names", ", ".join(j["users"]))
 
 		data = api.command("light", "get_state", "all")
 		for v in ["hardroom", "softroom", "corridor", "kitchen"]:
