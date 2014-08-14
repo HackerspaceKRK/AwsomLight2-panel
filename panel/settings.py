@@ -166,5 +166,5 @@ LOGGING = {
     }
 }
 
-API_URL = "http://light.at.hskrk.pl/api/v2"
+API_URL = "http://al2.hskrk.pl/api/v2"
 WHOIS_URL = "http://localhost:4446/whois"

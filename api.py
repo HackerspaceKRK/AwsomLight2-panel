@@ -1,7 +1,7 @@
 from urllib.request import *
 import json
 
-API_URL = "http://light.at.hskrk.pl/api/v2"
+API_URL = "http://al2.hskrk.pl/api/v2"
 
 def command(category, command, *args):
 	url = "{}/{}/{}/{}".format(API_URL, category, command, "/".join(list(args)))
