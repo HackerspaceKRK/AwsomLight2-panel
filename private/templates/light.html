@@ -118,9 +118,9 @@ $lights=file_get_contents('http://light/light_valid.txt');
 
         $('.light-switch').on('switch-change', function (e, data) {
 					if (data.value)
-            $.get('http://light.at.hskrk.pl/api/v2/light/enable/' + data.el.context.name);
+            $.get('http://al2.hskrk.pl/api/v2/light/enable/' + data.el.context.name);
 					else
-            $.get('http://light.at.hskrk.pl/api/v2/light/disable/' + data.el.context.name);
+            $.get('http://al2.hskrk.pl/api/v2/light/disable/' + data.el.context.name);
         });
     });
 </script>
