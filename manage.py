@@ -3,6 +3,7 @@ import os
 import sys
 
 sys.path.append('/usr/share/pyshared/')
+sys.path.append('/opt/kdhome/server/scripts/')
 
 if __name__ == "__main__":
 	os.environ.setdefault("DJANGO_SETTINGS_MODULE", "panel.settings")

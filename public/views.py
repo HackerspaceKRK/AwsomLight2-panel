@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import *
 from django.core import *
 from django.conf import settings
@@ -8,7 +9,10 @@ from django.views.generic import *
 from DefaultView import *
 import time, re, json
 from urllib.request import *
-import api
+import kdhome
+
+lights = kdhome.KDHome()
+lights.connect("localhost", 9999)
 
 class PublicView(DefaultView):
 
@@ -23,8 +27,11 @@ class IndexView(PublicView):
 	def __init__(self):
 		super(IndexView, self).__init__()
 
-		cnt = urlopen(settings.WHOIS_URL).read()
-		j = json.loads(cnt.decode())
+		try:
+			cnt = urlopen(settings.WHOIS_URL).read()
+			j = json.loads(cnt.decode())
+		except:
+			j = { "users": [] }
 
 		cnt = len(j["users"])
 		self.set("users", cnt)
@@ -40,9 +47,9 @@ class IndexView(PublicView):
 		self.set("znaj_str", znaj_str)
 		self.set("names", ", ".join(j["users"]))
 
-		data = api.command("light", "get_state", "all")
-		for v in ["hardroom", "softroom", "corridor", "kitchen"]:
-			self.set(v, "on" if data[v] else "off")
+		for v in ["HARDROOM", "SOFTROOM", "CORRIDOR", "KITCHEN", "CHILLROOM"]:
+			state = lights.getOutput(v)
+			self.set(v, "on" if state == 0 else "off")
 
 class WhoisView(PublicView):
 	template_name = "whois.html"
@@ -61,5 +68,5 @@ class WhoisView(PublicView):
 		self.set("temp", temp)
 
 def temp(request):
-	temp = api.command("temp", "get")
+	temp = 666
 	return HttpResponse(temp)

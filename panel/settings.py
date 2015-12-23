@@ -119,7 +119,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    'templates/'
+    'templates/',
 )
 
 INSTALLED_APPS = (
@@ -168,3 +168,6 @@ LOGGING = {
 
 API_URL = "http://al2.hskrk.pl/api/v2"
 WHOIS_URL = "http://localhost:4446/whois"
+
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+

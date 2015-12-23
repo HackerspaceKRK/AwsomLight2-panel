@@ -8,9 +8,12 @@ from django.views.generic import *
 from DefaultView import *
 import time, re, json
 from urllib.request import *
-import api
+import kdhome
 
 menu_items = []
+
+lights = kdhome.KDHome()
+lights.connect("localhost", 9999)
 
 def add_menu_item(name, url):
 	global menu_items
@@ -29,7 +32,7 @@ class PrivateView(DefaultView):
 
 	def __init__(self):
 		super(PrivateView, self).__init__()
-		self.add_menu_item("LIGHT", reverse("light"))
+		#self.add_menu_item("LIGHT", reverse("light"))
 		self.add_menu_item("WHOIS", reverse("whois"))
 		self.add_menu_item("INDEX", reverse("index"))
 
@@ -39,8 +42,12 @@ class IndexView(PrivateView):
 	def __init__(self):
 		super(IndexView, self).__init__()
 
-		cnt = urlopen(settings.WHOIS_URL).read()
-		j = json.loads(cnt.decode())
+		try:
+			cnt = urlopen(settings.WHOIS_URL).read()
+			j = json.loads(cnt.decode())
+		except:
+			j = { "users": [] }
+
 
 		cnt = len(j["users"])
 		self.set("users", cnt)
@@ -55,10 +62,11 @@ class IndexView(PrivateView):
 		self.set("osob_str", osob_str)
 		self.set("znaj_str", znaj_str)
 		self.set("names", ", ".join(j["users"]))
-
-		data = api.command("light", "get_state", "all")
-		for v in ["hardroom", "softroom", "corridor", "kitchen"]:
-			if data[v]:
+		
+		
+		for v in ["HARDROOM", "SOFTROOM", "CORRIDOR", "KITCHEN", "CHILLROOM"]:
+			state = lights.getOutput(v);
+			if state == 0:
 				self.set(v, "on")
 			else:
 				self.set(v, "off")
@@ -74,7 +82,7 @@ class WhoisView(PrivateView):
 
 		self.set("devices", j["total_devices_count"])
 
-		temp = api.command("temp", "get")
+		temp=666
 
 		self.set("names", j["users"])
 		self.set("temp", temp)
@@ -85,13 +93,14 @@ class LightView(PrivateView):
 	def __init__(self):
 		super(LightView, self).__init__()
 
-		data = api.command("light", "get_state", "all")
-		for v in ["hardroom", "softroom", "corridor", "kitchen"]:
-			if data[v]:
+		for v in ["HARDROOM", "SOFTROOM", "CORRIDOR", "KITCHEN"]:
+			state = lights.getOutput(v);
+			if state == 0:
 				self.set(v, "checked")
 			else:
 				self.set(v, "")
 
+
 def temp(request):
-	temp = api.command("temp", "get")
+	temp = 666
 	return HttpResponse(temp)
